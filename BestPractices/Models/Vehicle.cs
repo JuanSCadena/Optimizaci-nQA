@@ -19,6 +19,7 @@ namespace Best_Practices.Models
         public string Model { get; set; }
         public double Gas { get; set; }
         public double FuelLimit { get; set; }
+        public int Año { get; set; }
 
         #endregion
 
@@ -31,6 +32,7 @@ namespace Best_Practices.Models
             Brand = brand;
             Model = model;
             FuelLimit = fuelLimit;
+            Año = DateTime.Now.Year;
         }
 
         #endregion
