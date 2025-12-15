@@ -10,9 +10,11 @@ namespace Best_Practices.Infraestructure.Factories
     public class FordMustangCreator : Creator
     {
         public override Vehicle Create()
-        {
-            var builder = new CarBuilder();
-            return builder.Build();
-        }
+{
+    var builder = new CarBuilder();
+    return builder
+        .ConTodosLosDefectos()  // ← NUEVO método
+        .Construir();            // ← Método en español
+}
     }
 }
