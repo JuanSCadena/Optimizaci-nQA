@@ -20,7 +20,25 @@ namespace Best_Practices.Models
         public double Gas { get; set; }
         public double FuelLimit { get; set; }
         public int Año { get; set; }
+        /// <summary>
+        /// Tipo de motor del vehículo
+        /// </summary>
+        public string TipoMotor { get; set; }
 
+        /// <summary>
+        /// Caballos de fuerza del motor
+        /// </summary>
+        public int CaballosFuerza { get; set; }
+
+        /// <summary>
+        /// Tipo de transmisión
+        /// </summary>
+        public string Transmision { get; set; }
+
+        /// <summary>
+        /// Años de garantía
+        /// </summary>
+        public int AñosGarantia { get; set; }
         #endregion
 
         #region Constructors
@@ -33,6 +51,10 @@ namespace Best_Practices.Models
             Model = model;
             FuelLimit = fuelLimit;
             Año = DateTime.Now.Year;
+            TipoMotor = "I4";
+            CaballosFuerza = 200;
+            Transmision = "Automática";
+            AñosGarantia = 3;
         }
 
         #endregion
