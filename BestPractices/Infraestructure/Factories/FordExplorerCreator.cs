@@ -9,13 +9,16 @@ namespace Best_Practices.Infraestructure.Factories
 {
     public class FordExplorerCreator : Creator
     {
-        public override Vehicle Create()
+         public override Vehicle Create()
         {
             var builder = new CarBuilder();
             return builder
-                .SetModel("Explorer")
-                .SetColor("Black")
-                .Build();
+                .EstablecerModelo("Explorer")  
+                .EstablecerColor("Negro")      
+                .EstablecerTipoMotor("V6")
+                .EstablecerCaballosFuerza(300)
+                .ConAñoActual()
+                .Construir();
         }
     }
 }
