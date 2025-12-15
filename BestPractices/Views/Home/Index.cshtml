@@ -5,66 +5,113 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @if(!string.IsNullOrEmpty(ViewBag.ErrorMessage)) {
-        @ViewBag.ErrorMessage
+    
+    
+    @if(!string.IsNullOrEmpty(ViewBag.ErrorMessage)) 
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>Error:</strong> @ViewBag.ErrorMessage
+        </div>
     }
-    <table class="table">
-        <thead>
-        <th>Id</th>
-        <th>Tipo</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Color</th>
-        <th>Gallons</th>
-        <th>Año</th>
-        <th>Status</th>
-        <th>Actions</th>
-        </thead>
-        @foreach (var vehicle in Model.Vehicles)
-        {
-    <tr>
-        <td>
-            @vehicle.ID
-        </td>
-        <td>
-            @(vehicle.GetType().Name)
-        </td>
-        <td>
-            @vehicle.Brand
-        </td>
-        <td>
-            @vehicle.Model
-        </td>
-        <td>
-            @vehicle.Color
-        </td>
-        <td>
-            @vehicle.Gas.ToString("N1")
-        </td>
-        <td>
-    @vehicle.Año
-</td>
-        <td>
-            @(vehicle.IsEngineOn() ? "Encendido": "Apagado")
-        </td>
-        <td>
-            @if (vehicle.IsEngineOn())
-            {
-                <a href="/Home/StopEngine?id=@vehicle.ID">Stop Engine</a> }
-            else
-            {
-                <a href="/Home/StartEngine?id=@vehicle.ID">Start Engine</a>
-            }
+    
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Color</th>
+                    <th>Año</th>
+                    <th>Motor</th>
+                    <th>HP</th>
+                    <th>Transmisión</th>
+                    <th>Garantía</th>
+                    <th>Gasolina</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vehicle in Model.Vehicles)
+                {
+                    <tr>
+                        <td title="@vehicle.ID">
+                            @vehicle.ID.ToString().Substring(0, 8)...
+                        </td>
+                        <td>
+                            <span class="badge bg-info">@(vehicle.GetType().Name)</span>
+                        </td>
+                        <td>
+                            @vehicle.Brand
+                        </td>
+                        <td>
+                            <strong>@vehicle.Model</strong>
+                        </td>
+                        <td>
+                            @vehicle.Color
+                        </td>
+                        <td>
+                            @vehicle.Año
+                        </td>
+                        <td>
+                            @(vehicle.TipoMotor ?? "N/A")
+                        </td>
+                        <td>
+                            @vehicle.CaballosFuerza HP
+                        </td>
+                        <td>
+                            @(vehicle.Transmision ?? "N/A")
+                        </td>
+                        <td>
+                            @vehicle.AñosGarantia años
+                        </td>
+                        <td>
+                            @vehicle.Gas.ToString("N1")
+                        </td>
+                        <td>
+                            @if (vehicle.IsEngineOn())
+                            {
+                                <span class="badge bg-success">Encendido</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Apagado</span>
+                            }
+                        </td>
+                        <td>
+                            @if (vehicle.IsEngineOn())
+                            {
+                                <a href="/Home/StopEngine?id=@vehicle.ID" class="btn btn-sm btn-warning">Stop Engine</a>
+                            }
+                            else
+                            {
+                                <a href="/Home/StartEngine?id=@vehicle.ID" class="btn btn-sm btn-success">Start Engine</a>
+                            }
+                            <a href="/Home/AddGas?id=@vehicle.ID" class="btn btn-sm btn-primary">Llenar tanque</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-            <a href="/Home/AddGas?id=@vehicle.ID">LLenar tanque</a>
+    <div class="mt-4">
+        <h3>Agregar Vehículos</h3>
+        <p class="text-muted">Utiliza los botones para agregar diferentes modelos (Factory Method Pattern)</p>
+        <div class="btn-group" role="group" aria-label="Agregar vehículos">
+            <a href="/Home/AddMustang" class="btn btn-primary btn-lg">
+                 Agregar Mustang
+            </a>
+            <a href="/Home/AddExplorer" class="btn btn-success btn-lg">
+                 Agregar Explorer
+            </a>
+            <a href="/Home/AgregarEscape" class="btn btn-danger btn-lg">
+                 Agregar Escape
+            </a>
+        </div>
+    </div>
 
-        </td>
-    </tr>
-        }
-    </table>
-
-    <a href="/Home/AddMustang">Add Mustang</a>
-    <a href="/Home/AddExplorer">Add Explorer</a>
+    
 </div>
